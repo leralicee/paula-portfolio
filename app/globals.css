@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --porcelain: #fbf6f4;
+  --blush: #f6dce1;
+  --rose: #e1899b;
+  --rosewood: #8e4257;
+  --ink: #211c1e;
+  --taupe: #8c8079;
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: auto;
+  }
+
+  body {
+    background-color: var(--porcelain);
+    color: var(--ink);
+    font-family: var(--font-inter), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--rose);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--rosewood);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  body[data-cursor='on'],
+  body[data-cursor='on'] a,
+  body[data-cursor='on'] button,
+  body[data-cursor='on'] input,
+  body[data-cursor='on'] textarea {
+    cursor: none;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 480;
+  }
+}
+
+@layer components {
+  .label {
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--taupe);
+  }
+
+  .link-line {
+    position: relative;
+  }
+  .link-line::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.2em;
+    height: 1px;
+    width: 100%;
+    background-color: var(--rosewood);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s var(--ease-soft);
+  }
+  .link-line:hover::after,
+  .link-line:focus-visible::after {
+    transform: scaleX(1);
+  }
+}
+
+@layer utilities {
+  .hide-scrollbar {
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  body[data-cursor='on'],
+  body[data-cursor='on'] * {
+    cursor: auto !important;
+  }
+}
